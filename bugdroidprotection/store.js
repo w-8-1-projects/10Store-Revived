@@ -24,7 +24,7 @@ function shuffleArray(array) {
 }
 
 function checkScriptIntegrity() {
-    var remoteScriptUrl = 'https://10storedraydenyt.vercel.app/bugdroidprotection/store.js';
+    var remoteScriptUrl = 'https://w-8-1-projects.github.io/10Store-Revived/bugdroidprotection/store.js';
 
     var xhr = new XMLHttpRequest();
     xhr.open('GET', remoteScriptUrl, true);
