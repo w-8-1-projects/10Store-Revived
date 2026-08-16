@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>10Store Live</title>
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+    <style>
+        html, body {
+            -webkit-app-region: drag;
+        }
+        
+        body {
+            margin: 0; display: flex; justify-content: center; align-items: center;
+            height: 100vh;
+            font-family: 'Segoe UI', sans-serif; overflow: hidden;
+        }
+
+        .container { text-align: center; }
+
+        h1 { font-weight: 300; color: #666; font-size: 1.5rem; margin-bottom: -10px; }
+
+        #app-count {
+            display: block; font-size: 12rem; font-weight: 800;
+            color: #0078D7; line-height: 1;
+            transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .bump { transform: scale(1.1); }
+
+        .status-box { margin-top: 20px; font-size: 0.8rem; color: #999; }
+        #error-log { color: #E81123; font-size: 0.7rem; margin-top: 10px; display: none; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Live Apps</h1>
+        <span id="app-count">...</span>
+        <div class="status-box">
+            <span id="update-timer">Connecting to 10Store Servers</span>
+        </div>
+        <div id="error-log"></div>
+    </div>
+
+    <script src="config.js"></script>
+
+    <script>
+        const countDisplay = document.getElementById('app-count');
+        const errorLog = document.getElementById('error-log');
+        let currentCount = -1;
+
+async function fetchAppCount() {
+    const url = `https://raw.githubusercontent.com/draydenthemiiyt-maker/10-Store/refs/heads/main/apps.xml`;
+
+    try {
+        const response = await fetch(url);
+
+        if (!response.ok) {
+            throw new Error("HTTP " + response.status);
+        }
+
+        const xmlString = await response.text();
+
+        const parser = new DOMParser();
+        const xmlDoc = parser.parseFromString(xmlString, "text/xml");
+        const apps = xmlDoc.getElementsByTagName("app");
+        const newCount = apps.length;
+
+        if (newCount !== currentCount) {
+            updateDisplay(newCount);
+        }
+
+        errorLog.style.display = 'none';
+        document.getElementById('update-timer').innerText = "Live";
+
+    } catch (error) {
+        showError(error.message);
+    }
+}
+
+        function updateDisplay(count) {
+            if (currentCount !== -1 && count > currentCount && count % 50 === 0) {
+                triggerConfetti();
+            }
+
+            countDisplay.innerText = count;
+            countDisplay.classList.add('bump');
+            setTimeout(() => countDisplay.classList.remove('bump'), 300);
+            currentCount = count;
+        }
+
+        function showError(msg) {
+            console.error(msg);
+            errorLog.innerText = msg;
+            errorLog.style.display = 'block';
+            countDisplay.innerText = "!";
+        }
+
+        function triggerConfetti() {
+            confetti({ particleCount: 150, spread: 70, origin: { y: 0.6 }, colors: ['#0078D7', '#107C10'] });
+        }
+
+        setInterval(fetchAppCount, 1);
+        fetchAppCount();
+    </script>
+</body>
+</html>
