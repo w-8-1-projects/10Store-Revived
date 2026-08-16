@@ -1,0 +1,11 @@
+{
+    "appTitle": "Internet Explorer",
+    "newTab": "New Tab",
+    "back": "Back",
+    "forward": "Forward",
+    "refresh": "Refresh",
+    "assistant": "DrayAi (Soon)",
+    "searchPlaceholder": "Search or enter web address",
+    "loading": "Loading",
+	"greetings": "Welcome back!;Search the web;How can I help you today?;Hello! What's new?;Search ahead!"
+}

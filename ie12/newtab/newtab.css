@@ -1,0 +1,86 @@
+body, html {
+    overflow: hidden;
+}
+
+#backgroundContainer {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url("image.jpg");
+    background-size: cover;
+    background-position: center;
+    filter: brightness(0.5);
+    z-index: -1;
+    transition: opacity 3s ease-in;
+}
+
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    padding: 0 20px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeUp 0.5s ease-out forwards;
+}
+
+@keyframes fadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+
+#randomGreeting {
+    font-size: clamp(32px, 8vw, 64px);
+    font-weight: 200;
+    color: white;
+    margin-bottom: 40px;
+}
+
+.search-container {
+    display: flex;
+    width: 100%;
+    max-width: 600px;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-radius: 50px;
+    padding: 12px 25px;
+    border: 1px solid rgba(255,255,255,0.3);
+    box-sizing: border-box;
+}
+
+#searchInput {
+    flex: 1;
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+    outline: none;
+}
+
+    #searchInput::placeholder {
+        color: rgba(255,255,255,0.7);
+    }
+
+#searchBtn {
+    font-family: 'Segoe MDL2 Assets';
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 18px;
+    cursor: pointer;
+    padding-left: 10px;
+}

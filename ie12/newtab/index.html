@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>New Tab</title>
+
+    <link href="../winjs/ui-dark.css" rel="stylesheet" />
+    <script src="../winjs/base.js"></script>
+    <script src="../winjs/ui.js"></script>
+
+    <link href="newtab.css" rel="stylesheet" />
+</head>
+<body class="win-type-body">
+    <div id="backgroundContainer"></div>
+
+    <div class="main-content">
+        <h1 id="randomGreeting"></h1>
+
+        <div class="search-container">
+            <input type="text" id="searchInput"
+                   data-win-res="{attributes: {placeholder: 'searchPlaceholder'}}"
+                   autofocus>
+            <button id="searchBtn">&#xE11A;</button>
+        </div>
+    </div>
+
+    <script src="newtab.js"></script>
+</body>
+</html>
